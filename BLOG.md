@@ -71,7 +71,11 @@ Using VPC endpoints removed the need to use a NAT and traverse the public intern
 
 ### Add VPC endpoint for SQS queue
 
+1) This is a `network` resource allowing the private lambda to route messages to a service outside the private subnet. In this case the SQS service.
+2) Once created, execute the private lambda. Output should be send to the queue
+
 ### Configure private lambda to ouput to SQS Endpoint
+
 
 ### Confirm End-to-End execution
 
@@ -80,6 +84,9 @@ Using VPC endpoints removed the need to use a NAT and traverse the public intern
 
 - https://boto3.amazonaws.com/v1/documentation/api/latest/guide/sqs.html
 - https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-api-permissions-reference.html
+- https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-internetwork-traffic-privacy.html#sqs-vpc-endpoints
 - https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-sending-messages-from-vpc.html
+- https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-overview.html
 - https://medium.com/tensult/creating-vpc-endpoint-for-amazon-s3-using-terraform-7a15c840d36f
 - https://www.javacodemonk.com/python-send-event-from-aws-lambda-to-aws-sqs-a5f299dc
+- https://www.youtube.com/watch?v=caJ7zh9qzmw

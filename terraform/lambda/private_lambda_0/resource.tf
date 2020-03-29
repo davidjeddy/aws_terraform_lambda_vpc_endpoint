@@ -10,7 +10,7 @@ data archive_file this {
 
 resource aws_lambda_function this {
   filename         = data.archive_file.this.output_path
-  function_name    = join("-", [var.stage, var.name, "lambda", var.random_string.id])
+  function_name    = join("-", [var.stage, var.name, "private-lambda", var.random_string.id])
   handler          = "index.lambda_handler"
   role             = aws_iam_role.this.arn
   runtime          = "python3.7"
@@ -29,7 +29,7 @@ resource aws_lambda_function this {
 
   tags = merge(
     {
-      Name = join(var.delimiter, [var.name, var.stage, "lambda", var.random_string.id])
+      Name = join(var.delimiter, [var.name, var.stage, "private-lambda", var.random_string.id])
       Tech = "Python_3_7"
       Srv  = "Lambda"
     },
@@ -40,14 +40,14 @@ resource aws_lambda_function this {
 ## IAM role, policies, and attachments
 
 resource aws_iam_policy this {
-  name   = join(var.delimiter, [var.name, var.stage, "policy", var.random_string.id])
+  name   = join(var.delimiter, [var.name, var.stage, "private-lambda-policy", var.random_string.id])
   path   = "/"
   policy = file("${path.module}/iam/policy.json")
 }
 
 resource aws_iam_role this {
   assume_role_policy = file("${path.module}/iam/role.json")
-  name               = join(var.delimiter, [var.name, var.stage, "role", var.random_string.id])
+  name               = join(var.delimiter, [var.name, var.stage, "private-lambda-role", var.random_string.id])
 }
 
 resource aws_iam_role_policy_attachment this {

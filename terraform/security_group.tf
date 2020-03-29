@@ -14,7 +14,7 @@ resource aws_security_group private_lambda_0 {
     from_port   = 0
     to_port     = 0
     protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/28"] # AKA allow private subnet outbound
+    cidr_blocks = ["0.0.0.0/0"] # AKA allow everywhere inbound
   }
 
   tags = merge(

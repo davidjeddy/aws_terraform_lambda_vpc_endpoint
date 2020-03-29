@@ -2,27 +2,12 @@
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "CloudWatchLogs",
+            "Sid": "AllowAll",
             "Effect": "Allow",
             "Action": [
-                "logs:CreateLogGroup",
-                "logs:CreateLogStream",
-                "logs:DescribeLogStreams",
-                "logs:GetLogEvents",
-                "logs:PutLogEvents"
+                "*"
             ],
-            "Resource": [
-                "arn:aws:logs:*:*:*"
-            ]
-        },
-        {
-            "Sid": "SQS",
-            "Effect": "Allow",
-            "Action": [
-                "sqs:ReceiveMessage",
-                "sqs:DeleteMessage"
-            ],
-            "Resource": "arn:aws:sqs:*:*:*"
+            "Resource": "*"
         }
     ]
 }

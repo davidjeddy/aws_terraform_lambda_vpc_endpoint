@@ -70,7 +70,7 @@ resource aws_route_table private_0 {
 resource aws_subnet private_0 {
   availability_zone               = var.availability_zone[0]
   vpc_id                          = aws_vpc.this.id
-  cidr_block                      = "10.0.0.0/28"
+  cidr_block                      = var.vpc_private_cidr
   assign_ipv6_address_on_creation = false
 
   depends_on = [

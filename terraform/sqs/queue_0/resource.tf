@@ -16,6 +16,7 @@ resource aws_sqs_queue this {
   max_message_size          = 2048
   message_retention_seconds = 86400
   name                      = join(var.delimiter, [var.name, var.stage, "sqs", var.random_string.id])
+  policy                    = file("${path.module}/iam/policy.json")
   receive_wait_time_seconds = 10
 
   redrive_policy = jsonencode({
