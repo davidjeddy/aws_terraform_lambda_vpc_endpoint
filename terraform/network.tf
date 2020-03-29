@@ -3,10 +3,10 @@
 ## Internet Gateway
 
 resource aws_internet_gateway gw {
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.this.id
 
   depends_on = [
-    aws_vpc.vpc
+    aws_vpc.this
   ]
 
   tags = merge(
@@ -21,7 +21,7 @@ resource aws_internet_gateway gw {
 
 ## VPC
 
-resource aws_vpc vpc {
+resource aws_vpc this {
   assign_generated_ipv6_cidr_block = false
   cidr_block                       = var.vpc_private_cidr
   # TODO without public DNS the EC2 instances can not access codecommit
@@ -49,10 +49,10 @@ resource aws_route_table_association private_0 {
 ## Route Tables
 
 resource aws_route_table private_0 {
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.this.id
 
   depends_on = [
-    aws_vpc.vpc
+    aws_vpc.this
   ]
 
   tags = merge(
@@ -69,12 +69,12 @@ resource aws_route_table private_0 {
 
 resource aws_subnet private_0 {
   availability_zone               = var.availability_zone[0]
-  vpc_id                          = aws_vpc.vpc.id
+  vpc_id                          = aws_vpc.this.id
   cidr_block                      = "10.0.0.0/28"
   assign_ipv6_address_on_creation = false
 
   depends_on = [
-    aws_vpc.vpc
+    aws_vpc.this
   ]
 
   tags = merge(
