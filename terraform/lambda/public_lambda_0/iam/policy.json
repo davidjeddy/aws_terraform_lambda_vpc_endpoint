@@ -16,24 +16,11 @@
             ]
         },
         {
-            "Sid": "EC2",
-            "Effect": "Allow",
-            "Action": [
-                "ec2:CreateNetworkInterface",
-                "ec2:DeleteNetworkInterface",
-                "ec2:DescribeNetworkInterfaces",
-                "ec2:DescribeSecurityGroups",
-                "ec2:DescribeSubnets",
-                "ec2:DescribeVpcs"
-            ],
-            "Resource": "*"
-        },
-        {
             "Sid": "SQS",
             "Effect": "Allow",
             "Action": [
-                "sqs:SendMessage",
-                "sqs:GetQueueUrl"
+                "sqs:ReceiveMessage",
+                "sqs:DeleteMessage"
             ],
             "Resource": "arn:aws:sqs:*:*:*"
         }

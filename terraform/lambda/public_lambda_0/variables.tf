@@ -30,23 +30,6 @@ variable tags {
   type        = map
 }
 
-## VPC
-
-variable availability_zone {
-  description = "Availability zones withing the region"
-  type        = list(string)
-}
-
-variable region {
-  description = "AWS region"
-  type        = string
-}
-
-variable vpc_private_cidr {
-  description = "VPC network CIDR range"
-  type        = string
-}
-
 ## Module specific
 
 variable aws_sqs_queue {
@@ -55,16 +38,6 @@ variable aws_sqs_queue {
     arn = string
     id = string
   })
-}
-
-variable security_group_ids {
-  description = "Security group ID for the lambda placed into the private subnet."
-  type = list
-}
-
-variable subnet_ids {
-  description = "VPC subnet ID for the lambda placed into the private subnet."
-  type = list
 }
 
 variable random_string {

@@ -16,17 +16,6 @@ resource aws_lambda_function this {
   runtime          = "python3.7"
   source_code_hash = data.archive_file.this.output_base64sha256
 
-  environment {
-    variables = {
-      QueueArn = var.aws_sqs_queue.arn
-    }
-  }
-
-  vpc_config {
-    security_group_ids = var.security_group_ids
-    subnet_ids         = var.subnet_ids
-  }
-
   tags = merge(
     {
       Name = join(var.delimiter, [var.name, var.stage, "lambda", var.random_string.id])
