@@ -1,6 +1,6 @@
-resource aws_security_group private_lambda {
+resource aws_security_group private_lambda_0 {
   description = "Private Lambda SG"
-  name        = join(var.delimiter, [var.name, var.stage, "private-subnet-lambda", random_string.this.id])
+  name        = join(var.delimiter, [var.name, var.stage, "private-subnet-lambda-0", random_string.this.id])
   vpc_id      = aws_vpc.this.id
 
   ingress {
@@ -19,7 +19,7 @@ resource aws_security_group private_lambda {
 
   tags = merge(
     {
-      Name = join(var.delimiter, [var.name, var.stage, "private-subnet-lambda", random_string.this.id])
+      Name = join(var.delimiter, [var.name, var.stage, "private-subnet-lambda-0", random_string.this.id])
       Tech = "Security Group"
       Srv  = "EC2"
     },

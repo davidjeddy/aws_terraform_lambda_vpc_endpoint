@@ -22,8 +22,8 @@ Using VPC endpoints removed the need to use a NAT and traverse the public intern
 1) Add lambda module in the private subnet
 
 - Python 3.7 based, very simple
-- ADDED `ec2:...` permissions to allow the lambda to create and attach a ENI.
-- (optional) ADDED ClkoudWatch logs for logging view
+- Add `ec2:...` permissions to allow the lambda to create and attach an ENI
+- (optional) Add CloudWatch logs for logging view
 
 
 2) Add the new lambda module via `tf init`
@@ -35,7 +35,7 @@ Using VPC endpoints removed the need to use a NAT and traverse the public intern
 
 1) Create SQS queue
 2) Confirm queue exists via web console
-3) Updated private lambda permissions to allow access to queue
+3) Updated private lambda 0 permissions to allow access to queue
 
 ### ADD public lambda
 

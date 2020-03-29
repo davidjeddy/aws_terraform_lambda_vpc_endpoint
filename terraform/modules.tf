@@ -1,5 +1,5 @@
 module aws_lambda_function {
-  source = "./lambda/private_lambda"
+  source = "./lambda/private_lambda_0"
 
   # generic vars
   aws_acct_id       = var.aws_acct_id
@@ -13,7 +13,7 @@ module aws_lambda_function {
   vpc_private_cidr  = var.vpc_private_cidr
 
   # module vars
-  security_group_ids = [aws_security_group.private_lambda.id]
+  security_group_ids = [aws_security_group.private_lambda_0.id]
   subnet_ids         = [aws_subnet.private_0.id]
   random_string      = random_string.this
 }
