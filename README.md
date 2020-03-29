@@ -1,31 +1,21 @@
-# NAME
+# AWS VPC endpoints via Terraform
 
-## Badges
+<!-- ## Badges
 
-Build Status, Code Coverage, PR stats/timeframe, Project status, etc.
+Build Status, Code Coverage, PR stats/timeframe, Project status, etc. -->
 
 ## Description
 
-Why does this project exist?
-
-## Purpose
-
-Who needs it for what purpose? What problem / pain does this solve?
+An example implimentation of AWS VPC endpoints implimented via Terraform.
 
 ## Functionality
 
-What does this project do?
-
-## Special Features
-
-Does this proejct have a special ability or functionality the competitors do not?
+Connect an AWS Lambda in a private subnet to AWs services that requires publicly routable access; such as SQS, SNS, SES, etc.
 
 ## Table of Contents
 
 - [Badges](#Badges)
 - [Description](#Description)
-- [Purpose](#Purpose)
-- [Special Features](#Special%20Features)
 - [Functionality](#Functionality)
 - [Table of Contents](#Table%20of%20Contents)
 - [Contributing](#Contributing)
@@ -57,14 +47,9 @@ Please see [DEVDOCS.md](./DEVDOCS.md).
 
 ## Requirements
 
-- A list of items
-- required to run
-- the project (pre project cloning).
-- Do not include
-- project dependancies
-- installed via a
-- package manager such
-- as compose, npm, gem, etc.
+- AWS account
+- Linux POSIX compatible terminal
+- Terraform >= 0.12.24
 
 ## How to
 
