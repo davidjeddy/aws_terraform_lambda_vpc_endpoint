@@ -12,12 +12,8 @@ resource aws_sqs_queue dead_letter_queue {
 }
 
 resource aws_sqs_queue this {
-  delay_seconds             = 90
-  max_message_size          = 2048
-  message_retention_seconds = 86400
   name                      = join(var.delimiter, [var.name, var.stage, "sqs", var.random_string.id])
-  policy                    = file("${path.module}/iam/policy.json")
-  receive_wait_time_seconds = 10
+  receive_wait_time_seconds = 30
 
   redrive_policy = jsonencode({
     deadLetterTargetArn = aws_sqs_queue.dead_letter_queue.arn

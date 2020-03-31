@@ -11,9 +11,8 @@ if root.handlers:
     for handler in root.handlers:
         root.removeHandler(handler)
 
-def send_sqs_message(QueueName, msg_body):
+def send_sqs_message(QueueName, AwsAcctId, Region, event):
     """
-
     :param sqs_queue_url: String URL of existing SQS queue
     :param msg_body: String message body
     :return: Dictionary containing information about the sent message. If
@@ -21,37 +20,51 @@ def send_sqs_message(QueueName, msg_body):
     """
 
     # Send the SQS message
-    client = boto3.client('sqs')
+    # source https://github.com/boto/boto3/issues/2339
+    client = boto3.client('sqs', endpoint_url='https://sqs.' + Region + '.amazonaws.com')
+    print('client:', client)
+
+    # boto3 has an issue not finding the queue using the built in clientget_queue_url()
+    # print('QueueName:', QueueName)
     # sqs_queue_url = client.get_queue_url(
-    #     QueueName=QueueName
+    #     QueueName=QueueName,
+    #     QueueOwnerAWSAccountId=AwsAcctId
     # )['QueueUrl']
-    sqs_queue_url = client.get_queue_url(
-        QueueName="aws_terraform_vpc_endpoint-dev-sqs-0qxn	"
-    )['QueueUrl']
-    # sqs_queue_url = "https://sqs.us-west-2.amazonaws.com/345292015349/aws_terraform_vpc_endpoint-dev-sqs-0qxn"
+    sqs_queue_url = 'https://sqs.' + Region + '.amazonaws.com/' + AwsAcctId+ '/' + QueueName
     print('sqs_queue_url:', sqs_queue_url)
 
-    # try:
-    msg = client.send_message(QueueUrl=sqs_queue_url, MessageBody=json.dumps(msg_body))
-    print('msg:', msg)
-    # except ClientError as e:
-    #     logging.error(e)
-    #     return None
+    try:
+        msg = client.send_message(
+            QueueUrl=str(sqs_queue_url),
+            MessageBody=str(event)
+        )
+        print('msg:', msg)
+    except ClientError as e:
+        logging.error(e)
+        return None
     return msg
 
-
 def lambda_handler(event, context):
-    """Exercise send_sqs_message()"""
+    """
+    :param event: String URL of existing SQS queue
+    :param context: String message body
+    :return: Dictionary containing information about the function execution.
+    """
 
-    QueueName = str(os.environ['QueueArn'].split(':')[-1])
+    # import globals
+    AwsAcctId = str(os.environ['AWS_ACCT_ID'])
+    QueueName = str(os.environ['QUEUE_ARN'].split(':')[-1])
+    Region = str(os.environ['REGION'])
     print('QueueName:', QueueName)
+    print('Region:', Region)
 
     # Setup logging
     logging.basicConfig(level=logging.DEBUG, format='%(levelname)s: %(asctime)s: %(message)s')
 
     # Send some SQS messages
-    msg = send_sqs_message(QueueName, event)
+    msg = send_sqs_message(QueueName, AwsAcctId, Region, event)
     
+    # error handling
     if msg is not None:
         logging.info(f'Sent SQS message ID: {msg["MessageId"]}')
 

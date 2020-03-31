@@ -5,8 +5,7 @@
             "Action": "sts:AssumeRole",
             "Principal": {
                 "Service": [
-                    "lambda.amazonaws.com",
-                    "sqs.amazonaws.com"
+                    "lambda.amazonaws.com"
                 ]
             },
             "Effect": "Allow"

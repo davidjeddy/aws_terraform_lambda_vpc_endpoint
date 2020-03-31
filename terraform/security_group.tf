@@ -5,16 +5,22 @@ resource aws_security_group private_lambda_0 {
 
   ingress {
     from_port   = 0
-    to_port     = 0
+    to_port     = 65535
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # AKA allow everywhere inbound
+    cidr_blocks = [
+      "0.0.0.0/0", # AKA allow everywhere inbound
+      var.vpc_private_cidr
+    ]
   }
 
   egress {
     from_port   = 0
-    to_port     = 0
+    to_port     = 65535
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # AKA allow everywhere inbound
+    cidr_blocks = [
+      "0.0.0.0/0", # AKA allow everywhere inbound
+      var.vpc_private_cidr
+    ]
   }
 
   tags = merge(

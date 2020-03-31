@@ -2,7 +2,7 @@
 
 ## Internet Gateway
 
-resource aws_internet_gateway gw {
+resource aws_internet_gateway this {
   vpc_id = aws_vpc.this.id
 
   depends_on = [
@@ -24,10 +24,8 @@ resource aws_internet_gateway gw {
 resource aws_vpc this {
   assign_generated_ipv6_cidr_block = false
   cidr_block                       = var.vpc_private_cidr
-  # TODO without public DNS the EC2 instances can not access codecommit
-  # TODO FIX: https://docs.aws.amazon.com/codecommit/latest/userguide/codecommit-and-interface-VPC.html
-  enable_dns_support   = true # var.stage == "prd" ? false : true
-  enable_dns_hostnames = true # var.stage == "prd" ? false : true
+  enable_dns_hostnames             = true
+  enable_dns_support               = true
 
   tags = merge(
     {
@@ -54,6 +52,11 @@ resource aws_route_table private_0 {
   depends_on = [
     aws_vpc.this
   ]
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.this.id
+  }
 
   tags = merge(
     {
