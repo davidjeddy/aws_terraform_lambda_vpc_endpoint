@@ -56,31 +56,30 @@ Please see [DEVDOCS.md](./DEVDOCS.md).
 ### Obtain
 
 ```sh
-git clone ...
+git clone https://github.com/davidjeddy/aws_terraform_lambda_vpc_endpoint.git
 ```
 
 ### Configure
 
 ```sh
-echo -e "Some commands\n
-to configure\n
-the project.\n"
+cp example.terraform.tfvars terraform.tfvars
+# open terraform.tfvars in a text edit
+# Replace YOUR_ACCT_ID with your AWS account id
 ```
 
 ### Run
 
 ```sh
-echo -e "The commands\n
-to run\n
-the project."
+terraform plan
+terraform apply
+# enter [yes] when prompted
 ```
 
 ### Stop
 
 ```sh
-echo -e "You guessed it\n
-the command to stop
-the project.\n"
+terraform destroy
+# enter [yes] when prompted
 ```
 
 ## Versioning
