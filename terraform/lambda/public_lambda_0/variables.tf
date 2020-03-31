@@ -30,19 +30,19 @@ variable tags {
   type        = map
 }
 
-## Module specific
+variable random_string {
+  description = "Random identifier string object."
+  type = object({
+    id = string
+  })
+}
+
+## module specific vares
 
 variable aws_sqs_queue {
   description = "Target SQS queue"
   type = object({
     arn = string
-    id = string
-  })
-}
-
-variable random_string {
-  description = "Random identifier string object."
-  type = object({
     id = string
   })
 }

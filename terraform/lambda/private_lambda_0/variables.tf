@@ -30,7 +30,14 @@ variable tags {
   type        = map
 }
 
-## VPC
+variable random_string {
+  description = "Random identifier string object."
+  type = object({
+    id = string
+  })
+}
+
+## Module specific - Becuase the lambda is INSIDE a VPC, in a subnet, and needs a SG
 
 variable availability_zone {
   description = "Availability zones withing the region"
@@ -47,16 +54,6 @@ variable vpc_private_cidr {
   type        = string
 }
 
-## Module specific
-
-variable aws_sqs_queue {
-  description = "Target SQS queue"
-  type = object({
-    arn = string
-    id = string
-  })
-}
-
 variable security_group_ids {
   description = "Security group ID for the lambda placed into the private subnet."
   type = list
@@ -67,9 +64,10 @@ variable subnet_ids {
   type = list
 }
 
-variable random_string {
-  description = "Random identifier string object."
+variable aws_sqs_queue {
+  description = "Target SQS queue"
   type = object({
+    arn = string
     id = string
   })
 }

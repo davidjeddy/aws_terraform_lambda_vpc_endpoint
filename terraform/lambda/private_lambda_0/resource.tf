@@ -18,7 +18,9 @@ resource aws_lambda_function this {
 
   environment {
     variables = {
-      QueueArn = var.aws_sqs_queue.arn
+      AWS_ACCT_ID = var.aws_acct_id
+      QUEUE_ARN   = var.aws_sqs_queue.arn
+      REGION      = var.region
     }
   }
 

@@ -13,7 +13,6 @@ resource aws_sqs_queue dead_letter_queue {
 
 resource aws_sqs_queue this {
   name                      = join(var.delimiter, [var.name, var.stage, "sqs", var.random_string.id])
-  receive_wait_time_seconds = 30
 
   redrive_policy = jsonencode({
     deadLetterTargetArn = aws_sqs_queue.dead_letter_queue.arn

@@ -43,3 +43,10 @@ resource aws_iam_role_policy_attachment this {
   role       = aws_iam_role.this.name
   policy_arn = aws_iam_policy.this.arn
 }
+
+## Subscription to SQS queue
+
+resource "aws_lambda_event_source_mapping" "example" {
+  event_source_arn = var.aws_sqs_queue.arn
+  function_name    = aws_lambda_function.this.arn
+}
