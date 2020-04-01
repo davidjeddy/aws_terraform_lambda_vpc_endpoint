@@ -1,23 +1,5 @@
 # Networking
 
-## Internet Gateway
-
-resource aws_internet_gateway this {
-  vpc_id = aws_vpc.this.id
-
-  depends_on = [
-    aws_vpc.this
-  ]
-
-  tags = merge(
-    {
-      Name = join(var.delimiter, [var.name, var.stage, "internet-gateway", random_string.this.result])
-      Tech = "VPC"
-      Srv  = "IGW"
-    },
-    var.tags
-  )
-}
 
 ## VPC
 
@@ -52,11 +34,6 @@ resource aws_route_table private_0 {
   depends_on = [
     aws_vpc.this
   ]
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.this.id
-  }
 
   tags = merge(
     {
